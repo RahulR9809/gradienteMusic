@@ -14,7 +14,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.example.gradiente_music"
-    compileSdk = 34
+    compileSdk = 36
     ndkVersion = "27.0.12077973"
 
     sourceSets {
@@ -23,8 +23,9 @@ android {
 
     defaultConfig {
         applicationId = "com.example.gradiente_music"
-        minSdkVersion flutter.minSdkVersion
-        targetSdk = 34
+        // minSdkVersion flutter.minSdkVersion
+        minSdkVersion=23
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0.0"
         multiDexEnabled true

@@ -146,12 +146,12 @@ flutter:
     - assets/videos/splash_video.mp4
 
 
-# flutter_icons:
-#   android: true
-#   ios: true
-#   image_path: "assets/appicon/appicon.png"
-#   adaptive_icon_background: "#ffffff"
-#   adaptive_icon_foreground: "assets/appicon/appicon.png"
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/appicon/appicon.png"
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/appicon/appicon.png"
 
 
 
