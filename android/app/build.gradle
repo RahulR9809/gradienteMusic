@@ -3,7 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'dev.flutter.flutter-gradle-plugin'
     id 'kotlin-android'
-    // id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
 }
 
 def keystoreProperties = new Properties()
@@ -82,5 +82,6 @@ flutter {
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.1.0'
     implementation 'androidx.multidex:multidex:2.0.1'
-
+ implementation("com.google.firebase:firebase-auth")
+   implementation("com.google.android.gms:play-services-auth:21.4.0")
 }

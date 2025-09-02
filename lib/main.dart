@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:yourappname/firebase_options.dart';
 import 'package:yourappname/music/musicdetails.dart';
 import 'package:yourappname/provider/addfavouriteprovider.dart';
+import 'package:yourappname/provider/likeprovider.dart';
 import 'package:yourappname/provider/liveeventsprovider.dart';
 import 'package:yourappname/provider/musicdetailprovider.dart';
 import 'package:yourappname/provider/podcastprovider.dart';
@@ -37,6 +38,13 @@ import 'package:yourappname/utils/utils.dart';
 Future<void> main() async {
   
   WidgetsFlutterBinding.ensureInitialized();
+
+
+    SharedPref sharedPref = SharedPref();
+  String? userId = await sharedPref.read('userid');
+
+
+
   // Just Audio Player Background Service Set
   await JustAudioBackground.init(
     androidNotificationChannelId: Constant.appPackageName,
@@ -45,7 +53,20 @@ Future<void> main() async {
     androidNotificationOngoing: true,
     androidShowNotificationBadge: true,
   );
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  try {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  } catch (e) {
+    if (e.toString().contains('[core/duplicate-app]')) {
+      // Firebase already initialized, this is expected during hot restart
+      print('Firebase already initialized');
+    } else {
+      // Re-throw other errors
+      rethrow;
+    }
+  }
+
   await Locales.init([
     'en',
     'ar',
@@ -98,6 +119,11 @@ Future<void> main() async {
           ChangeNotifierProvider(create: (_) => MusicDetailProvider()),
           ChangeNotifierProvider(create: (_) => PodcatViewAllProvider()),
           ChangeNotifierProvider(create: (_) => ThemeProvider()),
+           ChangeNotifierProvider(create: (_) {
+            final likeProvider = LikeProvider();
+            likeProvider.setCurrentUser(userId); 
+            return likeProvider;
+          }),
         ],
         child: const MyApp(),
       ),

@@ -93,8 +93,7 @@ class MyAppbar extends StatelessWidget {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  colorPrimary,
-                  colorPrimary,
+                 colorBlack, colorGolden
                 ],
                 end: Alignment.bottomLeft,
                 begin: Alignment.bottomRight,

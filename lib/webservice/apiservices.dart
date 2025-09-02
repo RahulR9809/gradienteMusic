@@ -157,6 +157,7 @@ class ApiService {
       options: optHeaders,
     );
     bannerModel = BannerModel.fromJson(response.data);
+
     return bannerModel;
   }
 
@@ -186,6 +187,7 @@ class ApiService {
       options: optHeaders,
     );
     sectionDetailModel = SectionDetailModel.fromJson(response.data);
+    print('what in the actual shit is this ====>,${response.data}');
     return sectionDetailModel;
   }
 

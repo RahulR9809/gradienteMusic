@@ -13,6 +13,7 @@ import 'package:yourappname/pages/home.dart';
 import 'package:yourappname/pages/normallogin.dart';
 import 'package:yourappname/pages/otp.dart';
 import 'package:yourappname/provider/generalprovider.dart';
+import 'package:yourappname/provider/likeprovider.dart';
 import 'package:yourappname/utils/color.dart';
 import 'package:yourappname/utils/constant.dart';
 import 'package:yourappname/utils/dimens.dart';
@@ -86,11 +87,13 @@ class _LoginState extends State<Login> {
                 ),
               ),
               const SizedBox(height: 10),
-              MyImage(
-                  imagePath: "appicon.png",
-                  isAppIcon: true,
-                  height: 100,
-                  width: 100),
+              Center(
+                child: MyImage(
+                    imagePath: "appicon.png",
+                    isAppIcon: true,
+                    height: 100,
+                    width: 100),
+              ),
               const SizedBox(height: 30),
               // Welcome Back Text
               MyText(
@@ -379,6 +382,9 @@ class _LoginState extends State<Login> {
     printLog('GoogleSignIn ===> displayName : ${user.displayName}');
     printLog('GoogleSignIn ===> photoUrl : ${user.photoUrl}');
 
+    final likeProvider = Provider.of<LikeProvider>(context, listen: false);
+    likeProvider.setCurrentUser(user.id);
+
     if (!mounted) return;
     generalProvider.setLoading(true);
 
@@ -469,6 +475,8 @@ class _LoginState extends State<Login> {
         printLog("===>userEmail-else $userEmail");
         printLog("===>displayName-else $displayName");
       }
+        final likeProvider = Provider.of<LikeProvider>(context, listen: false);
+    likeProvider.setCurrentUser(firebasedId ?? firebaseUser?.uid.toString() ?? "");
 
       printLog("userEmail =====FINAL==> $userEmail");
       printLog("firebasedId ===FINAL==> $firebasedId");
@@ -504,6 +512,9 @@ class _LoginState extends State<Login> {
           userPremium: generalProvider.loginModel.result?[0].isBuy.toString(),
           userType: generalProvider.loginModel.result?[0].type.toString(),
         );
+
+       final likeProvider = Provider.of<LikeProvider>(context, listen: false);
+    likeProvider.setCurrentUser(generalProvider.loginModel.result?[0].id.toString());
 
         generalProvider.setLoading(false);
         if (!mounted) return;

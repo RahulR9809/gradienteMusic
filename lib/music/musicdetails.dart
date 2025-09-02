@@ -17,6 +17,7 @@ import 'package:yourappname/utils/constant.dart';
 import 'package:yourappname/music/musicmanager.dart';
 import 'package:yourappname/utils/dimens.dart';
 import 'package:yourappname/utils/utils.dart';
+import 'package:yourappname/widget/music_like_widget.dart';
 import 'package:yourappname/widget/musicutils.dart';
 import 'package:yourappname/widget/myimage.dart';
 import 'package:yourappname/widget/mynetworkimg.dart';
@@ -216,7 +217,7 @@ class _MusicDetailsState extends State<MusicDetails>
                         child: MyImage(
                             width: 15, height: 15, imagePath: "back.png")),
                     title: MyText(
-                      color: white,
+                      color: gray,
                       text: "Now Playing",
                       textalign: TextAlign.center,
                       fontsize: Dimens.textlargeBig,
@@ -290,6 +291,7 @@ class _MusicDetailsState extends State<MusicDetails>
                 StreamBuilder<SequenceState?>(
                   stream: audioPlayer.sequenceStateStream,
                   builder: (context, snapshot) {
+
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                       child: Align(
@@ -319,12 +321,34 @@ class _MusicDetailsState extends State<MusicDetails>
                 StreamBuilder<SequenceState?>(
                     stream: audioPlayer.sequenceStateStream,
                     builder: (context, snapshot) {
-                      return ((audioPlayer.sequenceState?.currentSource?.tag
-                                          as MediaItem?)
-                                      ?.displaySubtitle)
-                                  .toString() ==
-                              "podcast"
-                          ? SizedBox(
+                                          // final currentAudioId = (audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.extras?['audioId'] ?? '';
+
+                      return 
+
+
+  //=========changed here=====================>>>>>
+                             //=========changed here=====================>>>>>
+                              //=========changed here=====================>>>>>
+                               //=========changed here=====================>>>>>
+                                //=========changed here=====================>>>>>
+                                 //=========changed here=====================>>>>>
+                                  //=========changed here=====================>>>>>
+                                   //=========changed here=====================>>>>>
+                                    //=========changed here=====================>>>>>
+                                           //=========changed here=====================>>>>>
+
+
+
+                      
+                      // ((audioPlayer.sequenceState?.currentSource?.tag
+                      //                     as MediaItem?)
+                      //                 ?.displaySubtitle)
+                      //             .toString() ==
+                      //         "podcast"
+                      //     ?
+
+
+                           SizedBox(
                               width: MediaQuery.of(context).size.width,
                               // color: colorAccent,
                               child: SingleChildScrollView(
@@ -336,81 +360,83 @@ class _MusicDetailsState extends State<MusicDetails>
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    InkWell(
-                                      onTap: () {
-                                        musicDetailProvider.getCommentList(
-                                            "2",
-                                            ((audioPlayer
-                                                        .sequenceState
-                                                        ?.currentSource
-                                                        ?.tag as MediaItem?)
-                                                    ?.artist)
-                                                .toString(),
-                                            ((audioPlayer
-                                                        .sequenceState
-                                                        ?.currentSource
-                                                        ?.tag as MediaItem?)
-                                                    ?.id)
-                                                .toString(),
-                                            "1");
-                                        commentBottomSheet(
-                                          index: 0,
-                                          podcastId: ((audioPlayer
-                                                      .sequenceState
-                                                      ?.currentSource
-                                                      ?.tag as MediaItem?)
-                                                  ?.artist)
-                                              .toString(),
-                                          episodeId: ((audioPlayer
-                                                      .sequenceState
-                                                      ?.currentSource
-                                                      ?.tag as MediaItem?)
-                                                  ?.id)
-                                              .toString(),
-                                        );
-                                      },
-                                      child: Container(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 8, 15, 8),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: colorPrimary.withValues(
-                                              alpha: 0.25),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            MyImage(
-                                              width: 18,
-                                              height: 18,
-                                              imagePath: "ic_comment.png",
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .surface,
-                                            ),
-                                            const SizedBox(width: 8),
-                                            MyText(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .surface,
-                                                text: Utils.kmbGenerator(
-                                                    int.parse(((audioPlayer
-                                                                .sequenceState
-                                                                ?.currentSource
-                                                                ?.tag as MediaItem?)
-                                                            ?.extras?['total_comment'])
-                                                        .toString())),
-                                                multilanguage: false,
-                                                textalign: TextAlign.center,
-                                                fontsize: Dimens.textTitle,
-                                                maxline: 1,
-                                                fontwaight: FontWeight.w500,
-                                                overflow: TextOverflow.ellipsis,
-                                                fontstyle: FontStyle.normal),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    // InkWell(
+                                    //   onTap: () {
+                                    //     musicDetailProvider.getCommentList(
+                                    //         "2",
+                                    //         ((audioPlayer
+                                    //                     .sequenceState
+                                    //                     ?.currentSource
+                                    //                     ?.tag as MediaItem?)
+                                    //                 ?.artist)
+                                    //             .toString(),
+                                    //         ((audioPlayer
+                                    //                     .sequenceState
+                                    //                     ?.currentSource
+                                    //                     ?.tag as MediaItem?)
+                                    //                 ?.id)
+                                    //             .toString(),
+                                    //         "1");
+                                    //     commentBottomSheet(
+                                    //       index: 0,
+                                    //       podcastId: ((audioPlayer
+                                    //                   .sequenceState
+                                    //                   ?.currentSource
+                                    //                   ?.tag as MediaItem?)
+                                    //               ?.artist)
+                                    //           .toString(),
+                                    //       episodeId: ((audioPlayer
+                                    //                   .sequenceState
+                                    //                   ?.currentSource
+                                    //                   ?.tag as MediaItem?)
+                                    //               ?.id)
+                                    //           .toString(),
+                                    //     );
+                                    //   },
+                                    //   child: Container(
+                                    //     padding: const EdgeInsets.fromLTRB(
+                                    //         15, 8, 15, 8),
+                                    //     decoration: BoxDecoration(
+                                    //       borderRadius:
+                                    //           BorderRadius.circular(20),
+                                    //       color: colorPrimary.withValues(
+                                    //           alpha: 0.25),
+                                    //     ),
+                                    //     child: Row(
+                                    //       children: [
+                                    //         MyImage(
+                                    //           width: 18,
+                                    //           height: 18,
+                                    //           imagePath: "ic_comment.png",
+                                    //           color: Theme.of(context)
+                                    //               .colorScheme
+                                    //               .surface,
+                                           
+                                    //         ),
+                                    //         const SizedBox(width: 8),
+                                    //         MyText(
+                                    //             color: Theme.of(context)
+                                    //                 .colorScheme
+                                    //                 .surface,
+                                    //             text: Utils.kmbGenerator(
+                                    //                 int.parse(((audioPlayer
+                                    //                             .sequenceState
+                                    //                             ?.currentSource
+                                    //                             ?.tag as MediaItem?)
+                                    //                         ?.extras?['total_comment'])
+                                    //                     .toString())),
+                                    //             multilanguage: false,
+                                    //             textalign: TextAlign.center,
+                                    //             fontsize: Dimens.textTitle,
+                                    //             maxline: 1,
+                                    //             fontwaight: FontWeight.w500,
+                                    //             overflow: TextOverflow.ellipsis,
+                                    //             fontstyle: FontStyle.normal),
+                                    //       ],
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    MusicLikeWidget(),
                                     const SizedBox(width: 10),
                                     InkWell(
                                       onTap: () {
@@ -429,6 +455,7 @@ class _MusicDetailsState extends State<MusicDetails>
                                         ),
                                         child: Row(
                                           children: [
+                                            
                                             MyImage(
                                               width: 18,
                                               height: 18,
@@ -457,8 +484,19 @@ class _MusicDetailsState extends State<MusicDetails>
                                   ],
                                 ),
                               ),
-                            )
-                          : const SizedBox.shrink();
+                            );
+                            //=========changed here=====================>>>>>
+                             //=========changed here=====================>>>>>
+                              //=========changed here=====================>>>>>
+                               //=========changed here=====================>>>>>
+                                //=========changed here=====================>>>>>
+                                 //=========changed here=====================>>>>>
+                                  //=========changed here=====================>>>>>
+                                   //=========changed here=====================>>>>>
+                                    //=========changed here=====================>>>>>
+                                           //=========changed here=====================>>>>>
+                                  
+                          // : const SizedBox.shrink();
                     }),
                 Container(
                   margin: const EdgeInsets.fromLTRB(15, 20, 15, 15),
@@ -806,6 +844,20 @@ class _MusicDetailsState extends State<MusicDetails>
                         },
                       ),
                       // Favorite
+
+
+
+                        //=========check here this is the Like section =====================>>>>>
+                             //=========check here this is the Like section =====================>>>>>
+                              //=========check here this is the Like section =====================>>>>>
+                               //=========check here this is the Like section =====================>>>>>
+                                //=========check here this is the Like section =====================>>>>>
+                                 //=========check here this is the Like section =====================>>>>>
+                                  //=========check here this is the Like section =====================>>>>>
+                                   //=========check here this is the Like section =====================>>>>>
+                                    //=========check here this is the Like section =====================>>>>>
+                                           //=========check here this is the Like section =====================>>>>>
+
                       // _buildLikeUnlike(),
                     ],
                   ),
@@ -1312,6 +1364,31 @@ class _MusicDetailsState extends State<MusicDetails>
                           },
                         ),
                       ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                       // _buildLikeUnlike(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,

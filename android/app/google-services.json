@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "80002491455",
+    "project_id": "gradiente-music",
+    "storage_bucket": "gradiente-music.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80002491455:android:6ce601e167aa53e377448a",
+        "android_client_info": {
+          "package_name": "com.example.gradiente_music"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80002491455-49ai3jtrpicoi5itprmi2gmh90eg0rl7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gradiente_music",
+            "certificate_hash": "1dd91918c95b968809f2d9192f63c2b6b14c739e"
+          }
+        },
+        {
+          "client_id": "80002491455-nkdsltj1vpfd13v80gr8rlmmdvek3ajq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSivctgv0Yn4i_iTFb9z7y25sjIUmLHE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80002491455-nkdsltj1vpfd13v80gr8rlmmdvek3ajq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

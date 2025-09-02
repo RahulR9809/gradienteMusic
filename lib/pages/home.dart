@@ -190,6 +190,7 @@ class _HomeState extends State<Home> {
     printLog("Call MyCourse");
     printLog("Pageno:== ${(nextPage ?? 0) + 1}");
     await homeProvider.getBanner(0);
+   
     await homeProvider.getSeactionList((nextPage ?? 0) + 1);
     await homeProvider.setLoadMore(false);
   }
@@ -216,7 +217,7 @@ class _HomeState extends State<Home> {
             drawer: buildDrawer(),
             body: Column(
               children: [
-                appBar(),
+                appBar(context),
                 Consumer<HomeProvider>(builder: (context, homeprovider, child) {
                   if ((homeprovider.bannerModel.result == null ||
                           (homeprovider.bannerModel.result?.length ?? 0) ==
@@ -886,176 +887,179 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget appBar() {
-    return Container(
-      width: double.infinity,
-      constraints: const BoxConstraints(minHeight: 0),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorPrimary,
-            colorPrimary,
-          ],
-          end: Alignment.bottomLeft,
-          begin: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(25), bottomRight: Radius.circular(25)),
+
+Widget appBar(BuildContext context) {
+  final screenWidth = MediaQuery.of(context).size.width;
+  final screenHeight = MediaQuery.of(context).size.height;
+
+  return Container(
+    width: double.infinity,
+    constraints: const BoxConstraints(minHeight: 0),
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [colorBlack, colorGolden],
+        end: Alignment.bottomLeft,
+        begin: Alignment.bottomRight,
       ),
-      child: Column(
-        children: [
-          AppBar(
-            backgroundColor: transparent,
-            elevation: 0,
-            scrolledUnderElevation: 0,
-            surfaceTintColor: transparent,
-            systemOverlayStyle:
-                const SystemUiOverlayStyle(statusBarColor: colorPrimary),
-            titleSpacing: 10,
-            leading: IconButton(
-              icon: const Icon(Icons.menu, color: white),
-              onPressed: () {
-                drawerkey.currentState?.openDrawer();
-              },
-            ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                MyText(
+      borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(25),
+        bottomRight: Radius.circular(25),
+      ),
+    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AppBar(
+          backgroundColor: transparent,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          surfaceTintColor: transparent,
+          systemOverlayStyle:
+              const SystemUiOverlayStyle(statusBarColor: colorPrimary),
+          titleSpacing: screenWidth * 0.02, 
+          leading: IconButton(
+            icon: Icon(Icons.menu, color: white, size: screenWidth * 0.07),
+            onPressed: () {
+              drawerkey.currentState?.openDrawer();
+            },
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              MyText(
+                color: white,
+                multilanguage: true,
+                text: "Gradiente Music",
+                textalign: TextAlign.center,
+                fontsize: screenWidth * 0.05, // responsive font size
+                inter: 1,
+                maxline: 2,
+                fontwaight: FontWeight.w500,
+                overflow: TextOverflow.ellipsis,
+                fontstyle: FontStyle.normal,
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: () {
+                  if (Constant.userID == null) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Login()));
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NotificationPage()),
+                    );
+                  }
+                },
+                icon: Icon(
+                  Icons.notifications_outlined,
                   color: white,
-                  multilanguage: true,
-                  text: "discover",
-                  textalign: TextAlign.center,
-                  fontsize: Dimens.textlargeExtraBig,
-                  inter: 1,
-                  maxline: 2,
-                  fontwaight: FontWeight.w500,
-                  overflow: TextOverflow.ellipsis,
-                  fontstyle: FontStyle.normal,
+                  size: screenWidth * 0.07, // responsive icon size
                 ),
-                const Spacer(),
-                IconButton(
-                  onPressed: () {
-                    if (Constant.userID == null) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Login()));
-                    } else {
-                      Navigator.push(
+              ),
+              SizedBox(width: screenWidth * 0.01),
+              InkWell(
+                focusColor: transparent,
+                splashColor: transparent,
+                hoverColor: transparent,
+                highlightColor: transparent,
+                onTap: () {
+                  if (Constant.userID == null) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Login()));
+                  } else {
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const NotificationPage(),
-                        ),
-                      );
-                    }
-                  },
-                  icon: const Icon(
-                    Icons.notifications_outlined,
-                    color: white,
-                    size: 30,
-                  ),
-                ),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-                InkWell(
-                  focusColor: transparent,
-                  splashColor: transparent,
-                  hoverColor: transparent,
-                  highlightColor: transparent,
-                  onTap: () {
-                    if (Constant.userID == null) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Login()));
-                    } else {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Profile()));
-                    }
-                  },
-                  child: Constant.userID == null
-                      ? MyImage(
-                          width: 30,
-                          height: 30,
-                          imagePath: "ic_userprofile.png",
-                        )
-                      : Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              border: Border.all(
-                                color: white,
-                                width: 2,
-                              )),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: MyNetworkImage(
-                                imgWidth: 30,
-                                imgHeight: 30,
-                                fit: BoxFit.cover,
-                                imageUrl: Constant.userImage ?? ""),
+                            builder: (context) => const Profile()));
+                  }
+                },
+                child: Constant.userID == null
+                    ? MyImage(
+                        width: screenWidth * 0.08,
+                        height: screenWidth * 0.08,
+                        imagePath: "ic_userprofile.png",
+                      )
+                    : Container(
+                        padding: EdgeInsets.all(screenWidth * 0.005),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(
+                            color: white,
+                            width: screenWidth * 0.005,
                           ),
                         ),
-                ),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-              ],
-            ),
-            centerTitle: false,
-          ),
-          const SizedBox(height: 5),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-            alignment: Alignment.center,
-            child: TextFormField(
-              textAlign: TextAlign.left,
-              keyboardType: TextInputType.text,
-              readOnly: true,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const Search();
-                    },
-                  ),
-                );
-              },
-              decoration: InputDecoration(
-                prefixIcon: Container(
-                  width: 30,
-                  height: 30,
-                  alignment: Alignment.center,
-                  child: MyImage(
-                    width: 20,
-                    height: 20,
-                    imagePath: "ic_search.png",
-                    color: lightgray,
-                  ),
-                ),
-                hintText: Locales.string(context, "search"),
-                hintStyle: Utils.googleFontStyle(
-                    1, 18, FontStyle.normal, lightgray, FontWeight.w400),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32),
-                  borderSide: const BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
-                  ),
-                ),
-                filled: true,
-                contentPadding: const EdgeInsets.all(10),
-                fillColor: white,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: MyNetworkImage(
+                            imgWidth: screenWidth * 0.08,
+                            imgHeight: screenWidth * 0.08,
+                            fit: BoxFit.cover,
+                            imageUrl: Constant.userImage ?? "",
+                          ),
+                        ),
+                      ),
               ),
+              SizedBox(width: screenWidth * 0.01),
+            ],
+          ),
+          centerTitle: false,
+        ),
+        SizedBox(height: screenHeight * 0.01), // responsive spacing
+        Container(
+          width: screenWidth,
+          padding: EdgeInsets.fromLTRB(
+              screenWidth * 0.04, 0, screenWidth * 0.04, screenHeight * 0.015),
+          alignment: Alignment.center,
+          child: TextFormField(
+            textAlign: TextAlign.left,
+            keyboardType: TextInputType.text,
+            readOnly: true,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const Search();
+                  },
+                ),
+              );
+            },
+            decoration: InputDecoration(
+              prefixIcon: Container(
+                width: screenWidth * 0.1,
+                alignment: Alignment.center,
+                child: MyImage(
+                  width: screenWidth * 0.05,
+                  height: screenWidth * 0.05,
+                  imagePath: "ic_search.png",
+                  color: lightgray,
+                ),
+              ),
+              hintText: Locales.string(context, "search"),
+              hintStyle: Utils.googleFontStyle(
+                  1,
+                  screenWidth * 0.045, // responsive hint text
+                  FontStyle.normal,
+                  lightgray,
+                  FontWeight.w400),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(screenWidth * 0.08),
+                borderSide: BorderSide.none,
+              ),
+              filled: true,
+              contentPadding: EdgeInsets.all(screenWidth * 0.025),
+              fillColor: white,
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
+
 
   /* Drawer & AppBar End */
 
@@ -1112,6 +1116,14 @@ class _HomeState extends State<Home> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                 const SizedBox(height: 18),
+                                 ///changed herrrreeeeeeeeeeeeeeeeeeeeeeeeee==================================>
+                                 //////changed herrrreeeeeeeeeeeeeeeeeeeeeeeeee===============================>
+                                 //////changed herrrreeeeeeeeeeeeeeeeeeeeeeeeee===============================>
+                                 //////changed herrrreeeeeeeeeeeeeeeeeeeeeeeeee===============================>
+                                 //////changed herrrreeeeeeeeeeeeeeeeeeeeeeeeee===============================>
+                                 //////changed herrrreeeeeeeeeeeeeeeeeeeeeeeeee===============================>
+                                 ///changed herrrreeeeeeeeeeeeeeeeeeeeeeeeee==================================>
                                 MyText(
                                     color:
                                         Theme.of(context).colorScheme.surface,
@@ -1134,7 +1146,7 @@ class _HomeState extends State<Home> {
                                             .toString() ??
                                         "",
                                     textalign: TextAlign.center,
-                                    fontsize: Dimens.textSmall,
+                                    fontsize: Dimens.textExtraSmall,
                                     maxline: 1,
                                     fontwaight: FontWeight.w400,
                                     overflow: TextOverflow.ellipsis,
@@ -1360,6 +1372,16 @@ class _HomeState extends State<Home> {
                       hoverColor: transparent,
                       highlightColor: transparent,
                       onTap: () async {
+
+
+
+
+
+
+
+
+
+
                         if (homeprovider.bannerModel.result?[index].type == 1) {
                           /* Radio Banner */
                           Utils.playAudio(
@@ -2896,6 +2918,7 @@ class _HomeState extends State<Home> {
                     musicManager.playSingleSong(
                         sectionList?[sectionindex].data?[index].id.toString() ??
                             "",
+                            
                         sectionList?[sectionindex]
                                 .data?[index]
                                 .title

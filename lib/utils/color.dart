@@ -2,6 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 /* Main Color Start */
+
+
+const colorBlack = Color(0xFF000000);
+const colorGolden = Color(0xFFCC8D32);
+
+// const colorRedPink = Color(0xFFE02951);
+// const colorGolden = Color(0xFFB8860B);
+
+// const colorBlackCustom = Color(0xFF02091C); // Black
+
+// final gradientBlackRedPink = LinearGradient(
+//   colors: [colorBlack, colorRedPink],
+//   begin: Alignment.topLeft,
+//   end: Alignment.bottomRight,
+// );
+
 const colorPrimary = Color(0xFFFF452D);
 const colorPrimaryDark = Color(0xFFFF452D);
 const colorAccent = Color(0xFF71828A);
@@ -17,7 +33,7 @@ const transparent = Colors.transparent;
 
 /* ============================= Light Theme =============================== */
 
-final ThemeData lightTheme = ThemeData(
+final ThemeData    darkTheme = ThemeData(
   brightness: Brightness.light,
   /* Main Color Start */
   primaryColor: colorPrimary,
@@ -51,7 +67,7 @@ final ThemeData lightTheme = ThemeData(
 
 /* ============================= Dark Theme =============================== */
 
-final ThemeData darkTheme = ThemeData(
+final ThemeData lightTheme = ThemeData(
   brightness: Brightness.dark,
   /* Main Color Start */
   primaryColor: colorPrimary,

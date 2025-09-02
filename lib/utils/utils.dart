@@ -364,10 +364,13 @@ class Utils {
   ) async {
     printLog("audiourl ==========> $audiourl");
     printLog("songFrom ==========> $songFrom");
+    printLog("audioID ==========[[[[[[[[[[[]]]]]]]]]]]> $audioid");
     printLog("albumn ============> $albumn");
     printLog("isPremium =========> $isPremium");
     printLog("isBuy =============> $isBuy");
     printLog("audioList =========> ${audioList.length}");
+    SharedPref sharedPref = SharedPref();
+await sharedPref.save("current_audio_id", audioid);
     if (type == "radio") {
       if (isPremium == 1) {
         if (Constant.userID != null) {

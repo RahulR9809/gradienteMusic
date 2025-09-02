@@ -13,6 +13,7 @@ import 'package:yourappname/pages/home.dart';
 import 'package:yourappname/pages/normallogin.dart';
 import 'package:yourappname/pages/otp.dart';
 import 'package:yourappname/provider/generalprovider.dart';
+import 'package:yourappname/provider/likeprovider.dart';
 import 'package:yourappname/utils/color.dart';
 import 'package:yourappname/utils/constant.dart';
 import 'package:yourappname/utils/dimens.dart';
@@ -375,7 +376,12 @@ class _LoginState extends State<Login> {
     printLog('GoogleSignIn ===> email : ${user.email}');
     printLog('GoogleSignIn ===> displayName : ${user.displayName}');
     printLog('GoogleSignIn ===> photoUrl : ${user.photoUrl}');
-
+ SharedPref sharedPref = SharedPref();
+    await sharedPref.save('userid', user.id);
+    
+    // Update LikeProvider with the new user ID
+    final likeProvider = Provider.of<LikeProvider>(context, listen: false);
+    likeProvider.setCurrentUser(user.id);
     if (!mounted) return;
     generalProvider.setLoading(true);
 
@@ -463,6 +469,12 @@ class _LoginState extends State<Login> {
         userEmail = firebaseUser?.email.toString() ?? "";
         firebasedId = firebaseUser?.uid.toString();
         displayName = firebaseUser?.displayName.toString();
+         SharedPref sharedPref = SharedPref();
+    await sharedPref.save('userid', firebasedId);
+    
+    // Update LikeProvider with the new user ID
+    final likeProvider = Provider.of<LikeProvider>(context, listen: false);
+    likeProvider.setCurrentUser(firebasedId);
         printLog("===>userEmail-else $userEmail");
         printLog("===>displayName-else $displayName");
       }
@@ -501,7 +513,8 @@ class _LoginState extends State<Login> {
           userPremium: generalProvider.loginModel.result?[0].isBuy.toString(),
           userType: generalProvider.loginModel.result?[0].type.toString(),
         );
-
+  final likeProvider = Provider.of<LikeProvider>(context, listen: false);
+    likeProvider.setCurrentUser( generalProvider.loginModel.result?[0].id.toString());
         generalProvider.setLoading(false);
         if (!mounted) return;
 
