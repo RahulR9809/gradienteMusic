@@ -86,7 +86,7 @@ class _LoginState extends State<Login> {
                   imagePath: "back.png",
                 ),
               ),
-              const SizedBox(height: 10),
+              // const SizedBox(height: 10),
               Center(
                 child: MyImage(
                     imagePath: "appicon.png",
@@ -96,30 +96,34 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 30),
               // Welcome Back Text
-              MyText(
-                  color: Theme.of(context).colorScheme.surface,
-                  text: "welcomeback",
-                  multilanguage: true,
-                  fontsize: 27,
-                  maxline: 1,
-                  inter: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textalign: TextAlign.left,
-                  fontstyle: FontStyle.normal,
-                  fontwaight: FontWeight.bold),
+              Center(
+                child: MyText(
+                    color: Theme.of(context).colorScheme.surface,
+                    text: "welcomeback",
+                    multilanguage: true,
+                    fontsize: 27,
+                    maxline: 1,
+                    inter: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textalign: TextAlign.left,
+                    fontstyle: FontStyle.normal,
+                    fontwaight: FontWeight.bold),
+              ),
               const SizedBox(height: 10),
               // Enter Mobile Number Text
-              MyText(
-                  color: gray,
-                  text: "enteryourmobilenumbertologin",
-                  multilanguage: true,
-                  fontsize: Dimens.textMedium,
-                  maxline: 1,
-                  inter: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textalign: TextAlign.left,
-                  fontstyle: FontStyle.normal,
-                  fontwaight: FontWeight.w400),
+              Center(
+                child: MyText(
+                    color: gray,
+                    text: "enteryourmobilenumbertologin",
+                    multilanguage: true,
+                    fontsize: Dimens.textMedium,
+                    maxline: 1,
+                    inter: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textalign: TextAlign.left,
+                    fontstyle: FontStyle.normal,
+                    fontwaight: FontWeight.w400),
+              ),
               const SizedBox(height: 30),
               // Mobile Number TextField
               phonetextfield(),

@@ -13,7 +13,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.example.gradiente_music"
+    namespace = "com.gradientemusic.gradiente_music"
     compileSdk = 36
     ndkVersion = "27.0.12077973"
 
@@ -22,7 +22,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.gradiente_music"
+        applicationId = "com.gradientemusic.gradiente_music"
         // minSdkVersion flutter.minSdkVersion
         minSdkVersion=23
         targetSdk = 36
@@ -52,9 +52,9 @@ android {
     }
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
-            minifyEnabled true
-            shrinkResources true
+           signingConfig signingConfigs.release
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

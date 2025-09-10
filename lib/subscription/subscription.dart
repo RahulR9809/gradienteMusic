@@ -223,7 +223,7 @@ class SubscriptionState extends State<Subscription> {
                         decoration: Utils.setBackground(
                             (subscriptionProvider.purchasePos == -1)
                                 ? ((subscriptionProvider.cPlanPosition != -1)
-                                    ? colorPrimary
+                                    ? Colors.green
                                     : subscriptionBG)
                                 : colorAccent,
                             6),
@@ -338,12 +338,12 @@ class SubscriptionState extends State<Subscription> {
                     decoration: Utils.setBGWithBorder(
                         (subscriptionProvider.purchasePos == -1)
                             ? ((subscriptionProvider.cPlanPosition == index)
-                                ? colorPrimary
+                                ? Colors.green
                                 : Theme.of(context).secondaryHeaderColor)
                             : ((subscriptionProvider.purchasePos == index)
-                                ? colorPrimary
+                                ? Colors.green
                                 : Theme.of(context).secondaryHeaderColor),
-                        colorPrimary,
+                        white,
                         6,
                         1),
                     child: InkWell(
@@ -392,11 +392,11 @@ class SubscriptionState extends State<Subscription> {
                                         ? (subscriptionProvider.cPlanPosition ==
                                                 index
                                             ? white
-                                            : colorPrimary)
+                                            : white)
                                         : ((subscriptionProvider.purchasePos ==
                                                 index)
                                             ? white
-                                            : colorPrimary),
+                                            : white),
                                     text:
                                         "${Constant.currencySymbol}${packageList[index].price.toString()} / ${packageList[index].time.toString()} ${packageList[index].type.toString()}",
                                     textalign: TextAlign.start,

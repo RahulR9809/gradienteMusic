@@ -1,4 +1,4 @@
-package com.example.gradiente_music
+package com.gradientemusic.gradiente_music
 
 import android.content.Context;
 import com.ryanheise.audioservice.AudioServicePlugin;

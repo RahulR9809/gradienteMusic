@@ -6,7 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:miniplayer/miniplayer.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:yourappname/pages/home.dart';
 import 'package:yourappname/pages/login.dart';
 import 'package:yourappname/provider/musicdetailprovider.dart';
@@ -25,6 +27,29 @@ import 'package:yourappname/widget/mytext.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:text_scroll/text_scroll.dart';
+
+
+
+
+
+import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/rendering.dart';
+import 'package:just_audio_background/just_audio_background.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:http/http.dart' as http;
+import 'package:yourappname/music/musicdetails.dart';
+import 'package:yourappname/utils/constant.dart';
+
+
+
+
+
+
 
 AudioPlayer audioPlayer = AudioPlayer();
 late MusicManager musicManager;
@@ -438,12 +463,46 @@ class _MusicDetailsState extends State<MusicDetails>
                                     // ),
                                     MusicLikeWidget(),
                                     const SizedBox(width: 10),
+                                    
                                     InkWell(
-                                      onTap: () {
-                                        Utils.shareApp(Platform.isIOS
-                                            ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
-                                            : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n");
-                                      },
+                                      // onTap: () {
+                                      //   Utils.shareApp(Platform.isIOS
+                                      //       ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
+                                      //       : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n");
+                                      // },
+
+// onTap: () async {
+//   final String message = Platform.isIOS
+//       ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
+//       : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n";
+
+//   try {
+//     // Load asset image as bytes
+//     final byteData = await rootBundle.load('assets/appicon/appicon.png');
+
+//     // Get temporary directory
+//     final tempDir = await getTemporaryDirectory();
+//     final file = File('${tempDir.path}/appicon.png');
+
+//     // Write the bytes to a file
+//     await file.writeAsBytes(byteData.buffer.asUint8List());
+
+//     // Share with image and text
+//     await Share.shareXFiles(
+//       [XFile(file.path)],
+//       text: message,
+//     );
+//   } catch (e) {
+//     // Fallback to sharing only text if any error occurs
+//     await Share.share(message);
+//   }
+// },
+
+ onTap: () async {
+    // Call the enhanced share function
+    await _shareWithSongBanner();
+  },
+
                                       child: Container(
                                         padding: const EdgeInsets.fromLTRB(
                                             15, 8, 15, 8),
@@ -751,6 +810,7 @@ class _MusicDetailsState extends State<MusicDetails>
                       IconButton(
                         iconSize: 30.0,
                         icon: const Icon(Icons.volume_up),
+                        // color: Theme.of(context).colorScheme.surface,
                         color: Theme.of(context).colorScheme.surface,
                         onPressed: () {
                           showSliderDialog(
@@ -1935,3 +1995,711 @@ class _MusicDetailsState extends State<MusicDetails>
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Future<void> _shareWithSongBanner() async {
+//   try {
+//     final String message = Platform.isIOS
+//         ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
+//         : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n";
+
+//     // Get the song image URL
+//     final String? songImageUrl = ((audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.artUri).toString();
+    
+//     if (songImageUrl == null || songImageUrl == 'null') {
+//       // Fallback to original sharing method if no song image
+//       await _shareWithAppIconOnly(message);
+//       return;
+//     }
+
+//     // Create composite image with song banner and app icon
+//     final File compositeImageFile = await _createCompositeShareImage(songImageUrl);
+    
+//     // Share with composite image
+//     await Share.shareXFiles(
+//       [XFile(compositeImageFile.path)],
+//       text: message,
+//     );
+//   } catch (e) {
+//     // Fallback to text-only sharing
+//     await Share.share(Platform.isIOS
+//         ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
+//         : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n");
+//   }
+// }
+
+// // Fallback method for app icon only
+// Future<void> _shareWithAppIconOnly(String message) async {
+//   try {
+//     final byteData = await rootBundle.load('assets/appicon/appicon.png');
+//     final tempDir = await getTemporaryDirectory();
+//     final file = File('${tempDir.path}/appicon.png');
+//     await file.writeAsBytes(byteData.buffer.asUint8List());
+    
+//     await Share.shareXFiles(
+//       [XFile(file.path)],
+//       text: message,
+//     );
+//   } catch (e) {
+//     await Share.share(message);
+//   }
+// }
+
+// // Create composite image with song banner and app icon overlay
+// Future<File> _createCompositeShareImage(String songImageUrl) async {
+//   final tempDir = await getTemporaryDirectory();
+//   final outputFile = File('${tempDir.path}/share_image_${DateTime.now().millisecondsSinceEpoch}.png');
+
+//   try {
+//     // Download song image
+//     final http.Response songImageResponse = await http.get(Uri.parse(songImageUrl));
+//     final Uint8List songImageBytes = songImageResponse.bodyBytes;
+//     final ui.Codec songCodec = await ui.instantiateImageCodec(songImageBytes);
+//     final ui.FrameInfo songFrameInfo = await songCodec.getNextFrame();
+//     final ui.Image songImage = songFrameInfo.image;
+
+//     // Load app icon
+//     final ByteData appIconData = await rootBundle.load('assets/appicon/appicon.png');
+//     final Uint8List appIconBytes = appIconData.buffer.asUint8List();
+//     final ui.Codec appIconCodec = await ui.instantiateImageCodec(appIconBytes);
+//     final ui.FrameInfo appIconFrameInfo = await appIconCodec.getNextFrame();
+//     final ui.Image appIcon = appIconFrameInfo.image;
+
+//     // Create canvas and draw composite image
+//     final ui.PictureRecorder recorder = ui.PictureRecorder();
+//     final Canvas canvas = Canvas(recorder);
+//     final Size canvasSize = Size(songImage.width.toDouble(), songImage.height.toDouble());
+
+//     // Draw song image as background
+//     canvas.drawImage(songImage, Offset.zero, Paint());
+
+//     // Add semi-transparent overlay for better contrast
+//     final Paint overlayPaint = Paint()
+//       ..color = Colors.black.withOpacity(0.3);
+//     canvas.drawRect(Rect.fromLTWH(0, 0, canvasSize.width, canvasSize.height), overlayPaint);
+
+//     // Calculate app icon position (bottom-right corner with padding)
+//     final double iconSize = canvasSize.width * 0.2; // 20% of image width
+//     final double padding = canvasSize.width * 0.05; // 5% padding
+//     final Rect iconRect = Rect.fromLTWH(
+//       canvasSize.width - iconSize - padding,
+//       canvasSize.height - iconSize - padding,
+//       iconSize,
+//       iconSize,
+//     );
+
+//     // Draw app icon with circular background
+//     final Paint circlePaint = Paint()
+//       ..color = Colors.white
+//       ..style = PaintingStyle.fill;
+    
+//     final Offset iconCenter = iconRect.center;
+//     final double circleRadius = iconSize / 2 + 8; // Slightly larger than icon
+    
+//     canvas.drawCircle(iconCenter, circleRadius, circlePaint);
+    
+//     // Draw app icon
+//     canvas.drawImageRect(
+//       appIcon,
+//       Rect.fromLTWH(0, 0, appIcon.width.toDouble(), appIcon.height.toDouble()),
+//       iconRect,
+//       Paint(),
+//     );
+
+//     // Add song title text (optional)
+//     final String? songTitle = (audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title;
+//     if (songTitle != null && songTitle != 'null') {
+//       final ui.ParagraphBuilder paragraphBuilder = ui.ParagraphBuilder(
+//         ui.ParagraphStyle(
+//           textAlign: TextAlign.center,
+//           fontSize: canvasSize.width * 0.04,
+//           fontWeight: FontWeight.bold,
+//         ),
+//       );
+      
+//       paragraphBuilder.pushStyle(ui.TextStyle(color: Colors.white));
+//       paragraphBuilder.addText(songTitle);
+      
+//       final ui.Paragraph paragraph = paragraphBuilder.build();
+//       paragraph.layout(ui.ParagraphConstraints(width: canvasSize.width - 40));
+      
+//       canvas.drawParagraph(
+//         paragraph,
+//         Offset(20, canvasSize.height - iconSize - padding - paragraph.height - 20),
+//       );
+//     }
+
+//     // Convert to image and save
+//     final ui.Picture picture = recorder.endRecording();
+//     final ui.Image finalImage = await picture.toImage(
+//       canvasSize.width.toInt(),
+//       canvasSize.height.toInt(),
+//     );
+    
+//     final ByteData? pngBytes = await finalImage.toByteData(format: ui.ImageByteFormat.png);
+//     if (pngBytes != null) {
+//       await outputFile.writeAsBytes(pngBytes.buffer.asUint8List());
+//     }
+
+//     return outputFile;
+//   } catch (e) {
+//     // If composite creation fails, create a simple fallback
+//     return await _createSimpleFallbackImage();
+//   }
+// }
+
+// // Simple fallback image creation
+// Future<File> _createSimpleFallbackImage() async {
+//   final tempDir = await getTemporaryDirectory();
+//   final outputFile = File('${tempDir.path}/fallback_share_image.png');
+  
+//   // Load and save app icon as fallback
+//   final ByteData appIconData = await rootBundle.load('assets/appicon/appicon.png');
+//   await outputFile.writeAsBytes(appIconData.buffer.asUint8List());
+  
+//   return outputFile;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Future<void> _shareWithSongBanner() async {
+  try {
+    final String message = Platform.isIOS
+        ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
+        : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n";
+
+    // Get the song image URL
+    final String? songImageUrl = ((audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.artUri).toString();
+    
+    if (songImageUrl == null || songImageUrl == 'null') {
+      // Fallback to original sharing method if no song image
+      await _shareWithAppIconOnly(message);
+      return;
+    }
+
+    // Create composite image with song banner and app icon
+    final File compositeImageFile = await _createCompositeShareImage(songImageUrl);
+    
+    // Share with composite image
+    await Share.shareXFiles(
+      [XFile(compositeImageFile.path)],
+      text: message,
+    );
+  } catch (e) {
+    // Fallback to text-only sharing
+    await Share.share(Platform.isIOS
+        ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
+        : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n");
+  }
+}
+
+// Fallback method for app icon only
+Future<void> _shareWithAppIconOnly(String message) async {
+  try {
+    final byteData = await rootBundle.load('assets/appicon/appicon.png');
+    final tempDir = await getTemporaryDirectory();
+    final file = File('${tempDir.path}/appicon.png');
+    await file.writeAsBytes(byteData.buffer.asUint8List());
+    
+    await Share.shareXFiles(
+      [XFile(file.path)],
+      text: message,
+    );
+  } catch (e) {
+    await Share.share(message);
+  }
+}
+
+// Create composite image with song banner and app icon overlay
+Future<File> _createCompositeShareImage(String songImageUrl) async {
+  final tempDir = await getTemporaryDirectory();
+  final outputFile = File('${tempDir.path}/share_image_${DateTime.now().millisecondsSinceEpoch}.png');
+
+  try {
+    // Download song image
+    final http.Response songImageResponse = await http.get(Uri.parse(songImageUrl));
+    final Uint8List songImageBytes = songImageResponse.bodyBytes;
+    final ui.Codec songCodec = await ui.instantiateImageCodec(songImageBytes);
+    final ui.FrameInfo songFrameInfo = await songCodec.getNextFrame();
+    final ui.Image songImage = songFrameInfo.image;
+
+    // Load app icon
+    final ByteData appIconData = await rootBundle.load('assets/appicon/appicon.png');
+    final Uint8List appIconBytes = appIconData.buffer.asUint8List();
+    final ui.Codec appIconCodec = await ui.instantiateImageCodec(appIconBytes);
+    final ui.FrameInfo appIconFrameInfo = await appIconCodec.getNextFrame();
+    final ui.Image appIcon = appIconFrameInfo.image;
+
+    // Create canvas and draw composite image - FIXED LARGE SIZE
+    final ui.PictureRecorder recorder = ui.PictureRecorder();
+    final Canvas canvas = Canvas(recorder);
+    final Size canvasSize = Size(1200.0, 1200.0); // Fixed large size
+
+    // Draw song image as background (scaled to fill entire canvas)
+    canvas.drawImageRect(
+      songImage, 
+      Rect.fromLTWH(0, 0, songImage.width.toDouble(), songImage.height.toDouble()),
+      Rect.fromLTWH(0, 0, canvasSize.width, canvasSize.height),
+      Paint()
+    );
+
+    // Add semi-transparent overlay for better contrast
+    final Paint overlayPaint = Paint()
+      ..color = Colors.black.withOpacity(0.3);
+    canvas.drawRect(Rect.fromLTWH(0, 0, canvasSize.width, canvasSize.height), overlayPaint);
+
+    // Calculate app icon position (bottom-right corner with padding)
+    final double iconSize = canvasSize.width * 0.2; // 20% of image width
+    final double padding = canvasSize.width * 0.05; // 5% padding
+    final Rect iconRect = Rect.fromLTWH(
+      canvasSize.width - iconSize - padding,
+      canvasSize.height - iconSize - padding,
+      iconSize,
+      iconSize,
+    );
+
+    // Draw app icon with circular background
+    final Paint circlePaint = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
+    
+    final Offset iconCenter = iconRect.center;
+    final double circleRadius = iconSize / 2 + 8; // Slightly larger than icon
+    
+    canvas.drawCircle(iconCenter, circleRadius, circlePaint);
+    
+    // Draw app icon
+    canvas.drawImageRect(
+      appIcon,
+      Rect.fromLTWH(0, 0, appIcon.width.toDouble(), appIcon.height.toDouble()),
+      iconRect,
+      Paint(),
+    );
+
+    // Add song title text (optional)
+    final String? songTitle = (audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title;
+    if (songTitle != null && songTitle != 'null') {
+      final ui.ParagraphBuilder paragraphBuilder = ui.ParagraphBuilder(
+        ui.ParagraphStyle(
+          textAlign: TextAlign.center,
+          fontSize: canvasSize.width * 0.04,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+      
+      paragraphBuilder.pushStyle(ui.TextStyle(color: Colors.white));
+      paragraphBuilder.addText(songTitle);
+      
+      final ui.Paragraph paragraph = paragraphBuilder.build();
+      paragraph.layout(ui.ParagraphConstraints(width: canvasSize.width - 40));
+      
+      canvas.drawParagraph(
+        paragraph,
+        Offset(20, canvasSize.height - iconSize - padding - paragraph.height - 20),
+      );
+    }
+
+    // Convert to image and save
+    final ui.Picture picture = recorder.endRecording();
+    final ui.Image finalImage = await picture.toImage(
+      canvasSize.width.toInt(),
+      canvasSize.height.toInt(),
+    );
+    
+    final ByteData? pngBytes = await finalImage.toByteData(format: ui.ImageByteFormat.png);
+    if (pngBytes != null) {
+      await outputFile.writeAsBytes(pngBytes.buffer.asUint8List());
+    }
+
+    return outputFile;
+  } catch (e) {
+    // If composite creation fails, create a simple fallback
+    return await _createSimpleFallbackImage();
+  }
+}
+
+// Simple fallback image creation
+Future<File> _createSimpleFallbackImage() async {
+  final tempDir = await getTemporaryDirectory();
+  final outputFile = File('${tempDir.path}/fallback_share_image.png');
+  
+  // Load and save app icon as fallback
+  final ByteData appIconData = await rootBundle.load('assets/appicon/appicon.png');
+  await outputFile.writeAsBytes(appIconData.buffer.asUint8List());
+  
+  return outputFile;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Future<void> _shareWithSongBanner() async {
+//   try {
+//     final String message = Platform.isIOS
+//         ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
+//         : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n";
+
+//     // Get song details
+//     final MediaItem? mediaItem = audioPlayer.sequenceState?.currentSource?.tag as MediaItem?;
+//     final String? songImageUrl = mediaItem?.artUri?.toString();
+//     final String? songTitle = mediaItem?.title;
+//     final String? artistName = mediaItem?.artist;
+    
+//     // Create the Spotify-style share card
+//     final File shareImageFile = await _createSpotifyStyleShareCard(
+//       songImageUrl: songImageUrl,
+//       songTitle: songTitle ?? 'Unknown Song',
+//       artistName: artistName ?? 'Unknown Artist',
+//     );
+    
+//     // Share with the created image
+//     await Share.shareXFiles(
+//       [XFile(shareImageFile.path)],
+//       text: message,
+//     );
+//   } catch (e) {
+//     // Fallback to text-only sharing
+//     final String fallbackMessage = Platform.isIOS
+//         ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
+//         : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n";
+    
+//     await Share.share(fallbackMessage);
+//   }
+// }
+
+// // Create Spotify-style share card
+// Future<File> _createSpotifyStyleShareCard({
+//   String? songImageUrl,
+//   required String songTitle,
+//   required String artistName,
+// }) async {
+//   final tempDir = await getTemporaryDirectory();
+//   final outputFile = File('${tempDir.path}/music_share_card_${DateTime.now().millisecondsSinceEpoch}.png');
+
+//   try {
+//     // Card dimensions (similar to mobile sharing cards)
+//     const double cardWidth = 400;
+//     const double cardHeight = 500;
+//     const double cornerRadius = 20;
+//     const double albumArtSize = 280;
+//     const double padding = 20;
+
+//     // Create canvas
+//     final ui.PictureRecorder recorder = ui.PictureRecorder();
+//     final Canvas canvas = Canvas(recorder);
+
+//     // Draw background with gradient
+//     final Paint bgPaint = Paint()
+//       ..shader = const LinearGradient(
+//         begin: Alignment.topCenter,
+//         end: Alignment.bottomCenter,
+//         colors: [
+//           Color(0xFF1a1a1a),
+//           Color(0xFF2d2d2d),
+//         ],
+//       ).createShader(const Rect.fromLTWH(0, 0, cardWidth, cardHeight));
+    
+//     final RRect bgRRect = RRect.fromRectAndRadius(
+//       const Rect.fromLTWH(0, 0, cardWidth, cardHeight),
+//       const Radius.circular(cornerRadius),
+//     );
+//     canvas.drawRRect(bgRRect, bgPaint);
+
+//     // Load and draw album art
+//     ui.Image? albumImage;
+//     try {
+//       if (songImageUrl != null && songImageUrl != 'null' && songImageUrl.isNotEmpty) {
+//         final http.Response response = await http.get(Uri.parse(songImageUrl));
+//         final Uint8List imageBytes = response.bodyBytes;
+//         final ui.Codec codec = await ui.instantiateImageCodec(imageBytes);
+//         final ui.FrameInfo frameInfo = await codec.getNextFrame();
+//         albumImage = frameInfo.image;
+//       }
+//     } catch (e) {
+//       // Will use default placeholder if image fails to load
+//     }
+
+//     // Album art position (centered at top)
+//     const double albumX = (cardWidth - albumArtSize) / 2;
+//     const double albumY = padding;
+    
+//     if (albumImage != null) {
+//       // Draw album art with rounded corners
+//       final Path albumPath = Path()
+//         ..addRRect(RRect.fromRectAndRadius(
+//           const Rect.fromLTWH(albumX, albumY, albumArtSize, albumArtSize),
+//           const Radius.circular(12),
+//         ));
+//       canvas.clipPath(albumPath);
+      
+//       canvas.drawImageRect(
+//         albumImage,
+//         Rect.fromLTWH(0, 0, albumImage.width.toDouble(), albumImage.height.toDouble()),
+//         const Rect.fromLTWH(albumX, albumY, albumArtSize, albumArtSize),
+//         Paint(),
+//       );
+      
+//       // Reset clipping
+//       canvas.restore();
+//       canvas.save();
+//     } else {
+//       // Draw placeholder album art
+//       final Paint placeholderPaint = Paint()
+//         ..color = const Color(0xFF404040);
+      
+//       final RRect placeholderRRect = RRect.fromRectAndRadius(
+//         const Rect.fromLTWH(albumX, albumY, albumArtSize, albumArtSize),
+//         const Radius.circular(12),
+//       );
+//       canvas.drawRRect(placeholderRRect, placeholderPaint);
+      
+//       // Music note icon placeholder
+//       final Paint iconPaint = Paint()
+//         ..color = const Color(0xFF666666);
+      
+//       const double iconSize = 60;
+//       const double iconX = albumX + (albumArtSize - iconSize) / 2;
+//       const double iconY = albumY + (albumArtSize - iconSize) / 2;
+      
+//       // Simple music note shape
+//       canvas.drawCircle(Offset(iconX + 15, iconY + 45), 8, iconPaint);
+//       canvas.drawRect(Rect.fromLTWH(iconX + 23, iconY + 10, 3, 35), iconPaint);
+//       canvas.drawRect(Rect.fromLTWH(iconX + 26, iconY + 10, 15, 3), iconPaint);
+//     }
+
+//     // Song title
+//     final ui.ParagraphBuilder titleBuilder = ui.ParagraphBuilder(
+//       ui.ParagraphStyle(
+//         textAlign: TextAlign.center,
+//         fontSize: 24,
+//         fontWeight: FontWeight.bold,
+//         height: 1.2,
+//       ),
+//     );
+//     titleBuilder.pushStyle(ui.TextStyle(color: Colors.white));
+//     titleBuilder.addText(songTitle);
+    
+//     final ui.Paragraph titleParagraph = titleBuilder.build();
+//     titleParagraph.layout(ui.ParagraphConstraints(width: cardWidth - 40));
+    
+//     const double titleY = albumY + albumArtSize + 25;
+//     canvas.drawParagraph(
+//       titleParagraph,
+//       Offset((cardWidth - titleParagraph.width) / 2, titleY),
+//     );
+
+//     // Artist name
+//     final ui.ParagraphBuilder artistBuilder = ui.ParagraphBuilder(
+//       ui.ParagraphStyle(
+//         textAlign: TextAlign.center,
+//         fontSize: 18,
+//         height: 1.2,
+//       ),
+//     );
+//     artistBuilder.pushStyle(ui.TextStyle(color: const Color(0xFFB3B3B3)));
+//     artistBuilder.addText(artistName);
+    
+//     final ui.Paragraph artistParagraph = artistBuilder.build();
+//     artistParagraph.layout(ui.ParagraphConstraints(width: cardWidth - 40));
+    
+//     final double artistY = titleY + titleParagraph.height + 8;
+//     canvas.drawParagraph(
+//       artistParagraph,
+//       Offset((cardWidth - artistParagraph.width) / 2, artistY),
+//     );
+
+//     // App branding section at bottom
+//     final double brandingY = cardHeight - 80;
+    
+//     // App icon
+//     ui.Image? appIcon;
+//     try {
+//       final ByteData appIconData = await rootBundle.load('assets/appicon/appicon.png');
+//       final Uint8List appIconBytes = appIconData.buffer.asUint8List();
+//       final ui.Codec appIconCodec = await ui.instantiateImageCodec(appIconBytes);
+//       final ui.FrameInfo appIconFrameInfo = await appIconCodec.getNextFrame();
+//       appIcon = appIconFrameInfo.image;
+//     } catch (e) {
+//       // Continue without app icon if loading fails
+//     }
+
+//     if (appIcon != null) {
+//       const double iconSize = 32;
+//       const double iconX = padding;
+      
+//       canvas.drawImageRect(
+//         appIcon,
+//         Rect.fromLTWH(0, 0, appIcon.width.toDouble(), appIcon.height.toDouble()),
+//         Rect.fromLTWH(iconX, brandingY, iconSize, iconSize),
+//         Paint(),
+//       );
+//     }
+
+//     // App name
+//     final ui.ParagraphBuilder appNameBuilder = ui.ParagraphBuilder(
+//       ui.ParagraphStyle(
+//         textAlign: TextAlign.left,
+//         fontSize: 16,
+//         fontWeight: FontWeight.w600,
+//       ),
+//     );
+//     appNameBuilder.pushStyle(ui.TextStyle(color: Colors.white));
+//     appNameBuilder.addText(Constant.appName);
+    
+//     final ui.Paragraph appNameParagraph = appNameBuilder.build();
+//     appNameParagraph.layout(ui.ParagraphConstraints(width: cardWidth - 100));
+    
+//     const double appNameX = padding + 40; // After icon + spacing
+//     canvas.drawParagraph(
+//       appNameParagraph,
+//       Offset(appNameX, brandingY + 8),
+//     );
+
+//     // Convert to image and save
+//     final ui.Picture picture = recorder.endRecording();
+//     final ui.Image finalImage = await picture.toImage(
+//       cardWidth.toInt(),
+//       cardHeight.toInt(),
+//     );
+    
+//     final ByteData? pngBytes = await finalImage.toByteData(format: ui.ImageByteFormat.png);
+//     if (pngBytes != null) {
+//       await outputFile.writeAsBytes(pngBytes.buffer.asUint8List());
+//     }
+
+//     return outputFile;
+//   } catch (e) {
+//     // Create a simple text-based fallback card
+//     return await _createTextFallbackCard(songTitle, artistName);
+//   }
+// }
+
+// // Simple fallback card with just text
+// Future<File> _createTextFallbackCard(String songTitle, String artistName) async {
+//   final tempDir = await getTemporaryDirectory();
+//   final outputFile = File('${tempDir.path}/text_fallback_card.png');
+  
+//   const double cardWidth = 400;
+//   const double cardHeight = 300;
+  
+//   final ui.PictureRecorder recorder = ui.PictureRecorder();
+//   final Canvas canvas = Canvas(recorder);
+  
+//   // Background
+//   final Paint bgPaint = Paint()..color = const Color(0xFF1a1a1a);
+//   canvas.drawRect(const Rect.fromLTWH(0, 0, cardWidth, cardHeight), bgPaint);
+  
+//   // Title
+//   final ui.ParagraphBuilder titleBuilder = ui.ParagraphBuilder(
+//     ui.ParagraphStyle(
+//       textAlign: TextAlign.center,
+//       fontSize: 24,
+//       fontWeight: FontWeight.bold,
+//     ),
+//   );
+//   titleBuilder.pushStyle(ui.TextStyle(color: Colors.white));
+//   titleBuilder.addText(songTitle);
+  
+//   final ui.Paragraph titleParagraph = titleBuilder.build();
+//   titleParagraph.layout(ui.ParagraphConstraints(width: cardWidth - 40));
+//   canvas.drawParagraph(titleParagraph, Offset(20, cardHeight / 2 - 40));
+  
+//   // Artist
+//   final ui.ParagraphBuilder artistBuilder = ui.ParagraphBuilder(
+//     ui.ParagraphStyle(
+//       textAlign: TextAlign.center,
+//       fontSize: 18,
+//     ),
+//   );
+//   artistBuilder.pushStyle(ui.TextStyle(color: const Color(0xFFB3B3B3)));
+//   artistBuilder.addText(artistName);
+  
+//   final ui.Paragraph artistParagraph = artistBuilder.build();
+//   artistParagraph.layout(ui.ParagraphConstraints(width: cardWidth - 40));
+//   canvas.drawParagraph(artistParagraph, Offset(20, cardHeight / 2 + 10));
+  
+//   // App name
+//   final ui.ParagraphBuilder appBuilder = ui.ParagraphBuilder(
+//     ui.ParagraphStyle(
+//       textAlign: TextAlign.center,
+//       fontSize: 14,
+//     ),
+//   );
+//   appBuilder.pushStyle(ui.TextStyle(color: const Color(0xFF888888)));
+//   appBuilder.addText('Shared from ${Constant.appName}');
+  
+//   final ui.Paragraph appParagraph = appBuilder.build();
+//   appParagraph.layout(ui.ParagraphConstraints(width: cardWidth - 40));
+//   canvas.drawParagraph(appParagraph, Offset(20, cardHeight - 60));
+  
+//   final ui.Picture picture = recorder.endRecording();
+//   final ui.Image finalImage = await picture.toImage(cardWidth.toInt(), cardHeight.toInt());
+  
+//   final ByteData? pngBytes = await finalImage.toByteData(format: ui.ImageByteFormat.png);
+//   if (pngBytes != null) {
+//     await outputFile.writeAsBytes(pngBytes.buffer.asUint8List());
+//   }
+  
+//   return outputFile;
+// }
