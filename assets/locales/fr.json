@@ -146,8 +146,10 @@
   "register": "Registre",
   "full_name": "Nom et prénom",
   "darkmode": "Mode sombre",
-  "podcast": "Baladodiffusions",
-  "liveevents": "Événements en direct",
+  "playlist": "Ma Playlist",
+
+"myfavorites": "Mes favoris",
+
   "onwards": "En avant",
   "free": "Gratuit",
   "freeevntdiscription": "Arrivez tôt pour regarder cet événement en direct absolument gratuitement",

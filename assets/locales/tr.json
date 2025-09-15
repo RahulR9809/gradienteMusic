@@ -146,8 +146,9 @@
   "register": "Kayıt olmak",
   "full_name": "Ad Soyad",
   "darkmode": "Karanlık Mod",
-  "podcast": "Podcast'ler",
-  "liveevents": "Canlı etkinlikler",
+  "playlist": "Benim Oynatma Listem",
+
+"myfavorites": "Favorilerim",
   "onwards": "İleri",
   "free": "Özgür",
   "freeevntdiscription": "Bu canlı etkinliği tamamen ücretsiz izlemek için oraya erken gelin",

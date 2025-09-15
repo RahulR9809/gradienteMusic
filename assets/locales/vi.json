@@ -146,8 +146,9 @@
   "register": "Đăng ký",
   "full_name": "Tên đầy đủ",
   "darkmode": "Chế độ tối",
-  "podcast": "Podcast",
-  "liveevents": "Sự kiện trực tiếp",
+"playlist": "Danh sách phát của tôi",
+
+"myfavorites": "Yêu thích của tôi",
   "onwards": "Trở đi",
   "free": "Miễn phí",
   "freeevntdiscription": "Hãy đến sớm để xem sự kiện trực tiếp này hoàn toàn miễn phí",

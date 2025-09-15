@@ -9,6 +9,7 @@ import 'package:miniplayer/miniplayer.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:yourappname/music/lyrics.dart';
 import 'package:yourappname/pages/home.dart';
 import 'package:yourappname/pages/login.dart';
 import 'package:yourappname/provider/musicdetailprovider.dart';
@@ -28,10 +29,6 @@ import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:text_scroll/text_scroll.dart';
 
-
-
-
-
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -44,12 +41,6 @@ import 'package:share_plus/share_plus.dart';
 import 'package:http/http.dart' as http;
 import 'package:yourappname/music/musicdetails.dart';
 import 'package:yourappname/utils/constant.dart';
-
-
-
-
-
-
 
 AudioPlayer audioPlayer = AudioPlayer();
 late MusicManager musicManager;
@@ -273,7 +264,7 @@ class _MusicDetailsState extends State<MusicDetails>
                   borderRadius: BorderRadius.circular(0),
                   child: MyNetworkImage(
                     imgWidth: MediaQuery.of(context).size.width,
-                    imgHeight: MediaQuery.of(context).size.height * 0.32,
+                    imgHeight: MediaQuery.of(context).size.height * 0.34,
                     imageUrl: ((audioPlayer.sequenceState?.currentSource?.tag
                                 as MediaItem?)
                             ?.artUri)
@@ -316,7 +307,6 @@ class _MusicDetailsState extends State<MusicDetails>
                 StreamBuilder<SequenceState?>(
                   stream: audioPlayer.sequenceStateStream,
                   builder: (context, snapshot) {
-
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                       child: Align(
@@ -346,216 +336,233 @@ class _MusicDetailsState extends State<MusicDetails>
                 StreamBuilder<SequenceState?>(
                     stream: audioPlayer.sequenceStateStream,
                     builder: (context, snapshot) {
-                                          // final currentAudioId = (audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.extras?['audioId'] ?? '';
+                      // final currentAudioId = (audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.extras?['audioId'] ?? '';
 
-                      return 
+                      return
 
+                          //=========changed here=====================>>>>>
+                          //=========changed here=====================>>>>>
+                          //=========changed here=====================>>>>>
+                          //=========changed here=====================>>>>>
+                          //=========changed here=====================>>>>>
+                          //=========changed here=====================>>>>>
+                          //=========changed here=====================>>>>>
+                          //=========changed here=====================>>>>>
+                          //=========changed here=====================>>>>>
+                          //=========changed here=====================>>>>>
 
-  //=========changed here=====================>>>>>
-                             //=========changed here=====================>>>>>
-                              //=========changed here=====================>>>>>
-                               //=========changed here=====================>>>>>
-                                //=========changed here=====================>>>>>
-                                 //=========changed here=====================>>>>>
-                                  //=========changed here=====================>>>>>
-                                   //=========changed here=====================>>>>>
-                                    //=========changed here=====================>>>>>
-                                           //=========changed here=====================>>>>>
+                          // ((audioPlayer.sequenceState?.currentSource?.tag
+                          //                     as MediaItem?)
+                          //                 ?.displaySubtitle)
+                          //             .toString() ==
+                          //         "podcast"
+                          //     ?
 
+                          SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        // color: colorAccent,
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // InkWell(
+                              //   onTap: () {
+                              //     musicDetailProvider.getCommentList(
+                              //         "2",
+                              //         ((audioPlayer
+                              //                     .sequenceState
+                              //                     ?.currentSource
+                              //                     ?.tag as MediaItem?)
+                              //                 ?.artist)
+                              //             .toString(),
+                              //         ((audioPlayer
+                              //                     .sequenceState
+                              //                     ?.currentSource
+                              //                     ?.tag as MediaItem?)
+                              //                 ?.id)
+                              //             .toString(),
+                              //         "1");
+                              //     commentBottomSheet(
+                              //       index: 0,
+                              //       podcastId: ((audioPlayer
+                              //                   .sequenceState
+                              //                   ?.currentSource
+                              //                   ?.tag as MediaItem?)
+                              //               ?.artist)
+                              //           .toString(),
+                              //       episodeId: ((audioPlayer
+                              //                   .sequenceState
+                              //                   ?.currentSource
+                              //                   ?.tag as MediaItem?)
+                              //               ?.id)
+                              //           .toString(),
+                              //     );
+                              //   },
+                              //   child: Container(
+                              //     padding: const EdgeInsets.fromLTRB(
+                              //         15, 8, 15, 8),
+                              //     decoration: BoxDecoration(
+                              //       borderRadius:
+                              //           BorderRadius.circular(20),
+                              //       color: colorPrimary.withValues(
+                              //           alpha: 0.25),
+                              //     ),
+                              //     child: Row(
+                              //       children: [
+                              //         MyImage(
+                              //           width: 18,
+                              //           height: 18,
+                              //           imagePath: "ic_comment.png",
+                              //           color: Theme.of(context)
+                              //               .colorScheme
+                              //               .surface,
 
+                              //         ),
+                              //         const SizedBox(width: 8),
+                              //         MyText(
+                              //             color: Theme.of(context)
+                              //                 .colorScheme
+                              //                 .surface,
+                              //             text: Utils.kmbGenerator(
+                              //                 int.parse(((audioPlayer
+                              //                             .sequenceState
+                              //                             ?.currentSource
+                              //                             ?.tag as MediaItem?)
+                              //                         ?.extras?['total_comment'])
+                              //                     .toString())),
+                              //             multilanguage: false,
+                              //             textalign: TextAlign.center,
+                              //             fontsize: Dimens.textTitle,
+                              //             maxline: 1,
+                              //             fontwaight: FontWeight.w500,
+                              //             overflow: TextOverflow.ellipsis,
+                              //             fontstyle: FontStyle.normal),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
+                              MusicLikeWidget(),
+                              const SizedBox(width: 10),
 
-                      
-                      // ((audioPlayer.sequenceState?.currentSource?.tag
-                      //                     as MediaItem?)
-                      //                 ?.displaySubtitle)
-                      //             .toString() ==
-                      //         "podcast"
-                      //     ?
+                              InkWell(
+                                // onTap: () {
+                                //   Utils.shareApp(Platform.isIOS
+                                //       ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
+                                //       : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n");
+                                // },
 
+                                onTap: () async {
+                                  // Call the enhanced share function
+                                  await _shareWithSongBanner();
+                                },
 
-                           SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              // color: colorAccent,
-                              child: SingleChildScrollView(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // InkWell(
-                                    //   onTap: () {
-                                    //     musicDetailProvider.getCommentList(
-                                    //         "2",
-                                    //         ((audioPlayer
-                                    //                     .sequenceState
-                                    //                     ?.currentSource
-                                    //                     ?.tag as MediaItem?)
-                                    //                 ?.artist)
-                                    //             .toString(),
-                                    //         ((audioPlayer
-                                    //                     .sequenceState
-                                    //                     ?.currentSource
-                                    //                     ?.tag as MediaItem?)
-                                    //                 ?.id)
-                                    //             .toString(),
-                                    //         "1");
-                                    //     commentBottomSheet(
-                                    //       index: 0,
-                                    //       podcastId: ((audioPlayer
-                                    //                   .sequenceState
-                                    //                   ?.currentSource
-                                    //                   ?.tag as MediaItem?)
-                                    //               ?.artist)
-                                    //           .toString(),
-                                    //       episodeId: ((audioPlayer
-                                    //                   .sequenceState
-                                    //                   ?.currentSource
-                                    //                   ?.tag as MediaItem?)
-                                    //               ?.id)
-                                    //           .toString(),
-                                    //     );
-                                    //   },
-                                    //   child: Container(
-                                    //     padding: const EdgeInsets.fromLTRB(
-                                    //         15, 8, 15, 8),
-                                    //     decoration: BoxDecoration(
-                                    //       borderRadius:
-                                    //           BorderRadius.circular(20),
-                                    //       color: colorPrimary.withValues(
-                                    //           alpha: 0.25),
-                                    //     ),
-                                    //     child: Row(
-                                    //       children: [
-                                    //         MyImage(
-                                    //           width: 18,
-                                    //           height: 18,
-                                    //           imagePath: "ic_comment.png",
-                                    //           color: Theme.of(context)
-                                    //               .colorScheme
-                                    //               .surface,
-                                           
-                                    //         ),
-                                    //         const SizedBox(width: 8),
-                                    //         MyText(
-                                    //             color: Theme.of(context)
-                                    //                 .colorScheme
-                                    //                 .surface,
-                                    //             text: Utils.kmbGenerator(
-                                    //                 int.parse(((audioPlayer
-                                    //                             .sequenceState
-                                    //                             ?.currentSource
-                                    //                             ?.tag as MediaItem?)
-                                    //                         ?.extras?['total_comment'])
-                                    //                     .toString())),
-                                    //             multilanguage: false,
-                                    //             textalign: TextAlign.center,
-                                    //             fontsize: Dimens.textTitle,
-                                    //             maxline: 1,
-                                    //             fontwaight: FontWeight.w500,
-                                    //             overflow: TextOverflow.ellipsis,
-                                    //             fontstyle: FontStyle.normal),
-                                    //       ],
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    MusicLikeWidget(),
-                                    const SizedBox(width: 10),
-                                    
-                                    InkWell(
-                                      // onTap: () {
-                                      //   Utils.shareApp(Platform.isIOS
-                                      //       ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
-                                      //       : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n");
-                                      // },
-
-// onTap: () async {
-//   final String message = Platform.isIOS
-//       ? "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://apps.apple.com/us/app/${Constant.appName.toLowerCase()}/${Constant.appPackageName} \n"
-//       : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n";
-
-//   try {
-//     // Load asset image as bytes
-//     final byteData = await rootBundle.load('assets/appicon/appicon.png');
-
-//     // Get temporary directory
-//     final tempDir = await getTemporaryDirectory();
-//     final file = File('${tempDir.path}/appicon.png');
-
-//     // Write the bytes to a file
-//     await file.writeAsBytes(byteData.buffer.asUint8List());
-
-//     // Share with image and text
-//     await Share.shareXFiles(
-//       [XFile(file.path)],
-//       text: message,
-//     );
-//   } catch (e) {
-//     // Fallback to sharing only text if any error occurs
-//     await Share.share(message);
-//   }
-// },
-
- onTap: () async {
-    // Call the enhanced share function
-    await _shareWithSongBanner();
-  },
-
-                                      child: Container(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            15, 8, 15, 8),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: colorPrimary.withValues(
-                                              alpha: 0.25),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            
-                                            MyImage(
-                                              width: 18,
-                                              height: 18,
-                                              imagePath: "ic_sharemusic.png",
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .surface,
-                                            ),
-                                            const SizedBox(width: 8),
-                                            MyText(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .surface,
-                                                text: "share",
-                                                multilanguage: true,
-                                                textalign: TextAlign.center,
-                                                fontsize: Dimens.textTitle,
-                                                maxline: 6,
-                                                fontwaight: FontWeight.w600,
-                                                overflow: TextOverflow.ellipsis,
-                                                fontstyle: FontStyle.normal),
-                                          ],
-                                        ),
+                                child: Container(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(15, 8, 15, 8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: colorPrimary.withValues(alpha: 0.25),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      MyImage(
+                                        width: 18,
+                                        height: 18,
+                                        imagePath: "ic_sharemusic.png",
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surface,
                                       ),
-                                    ),
-                                  ],
+                                      const SizedBox(width: 8),
+                                      MyText(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface,
+                                          text: "share",
+                                          multilanguage: true,
+                                          textalign: TextAlign.center,
+                                          fontsize: Dimens.textTitle,
+                                          maxline: 6,
+                                          fontwaight: FontWeight.w600,
+                                          overflow: TextOverflow.ellipsis,
+                                          fontstyle: FontStyle.normal),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            );
-                            //=========changed here=====================>>>>>
-                             //=========changed here=====================>>>>>
-                              //=========changed here=====================>>>>>
-                               //=========changed here=====================>>>>>
-                                //=========changed here=====================>>>>>
-                                 //=========changed here=====================>>>>>
-                                  //=========changed here=====================>>>>>
-                                   //=========changed here=====================>>>>>
-                                    //=========changed here=====================>>>>>
-                                           //=========changed here=====================>>>>>
-                                  
-                          // : const SizedBox.shrink();
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width *
+                                    0.4, // 40% of screen width
+                              ),
+
+                              Row(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.10, // ~12% of screen width
+                                    height: MediaQuery.of(context).size.width *
+                                        0.10, // Same as width for a circle
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? colorPrimary
+                                              : const Color.fromARGB(255, 236, 235, 235),
+                                          Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? colorGolden
+                                              :  colorPrimary
+                                        ],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.black54
+                                              : const Color.fromARGB(255, 158, 158, 158).withOpacity(0.5),
+                                          blurRadius: 10,
+                                          offset: Offset(0, 4),
+                                        ),
+                                      ],
+                                    ),
+                                    child: IconButton(
+                                      iconSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.06, // Icon adapts too
+                                      padding: EdgeInsets.all(8),
+                                      icon:
+                                          Icon(Icons.add, color: Colors.white),
+                                      onPressed: () {
+                                        print('Add to Playlist tapped');
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                      //=========changed here=====================>>>>>
+                      //=========changed here=====================>>>>>
+                      //=========changed here=====================>>>>>
+                      //=========changed here=====================>>>>>
+                      //=========changed here=====================>>>>>
+                      //=========changed here=====================>>>>>
+                      //=========changed here=====================>>>>>
+                      //=========changed here=====================>>>>>
+                      //=========changed here=====================>>>>>
+                      //=========changed here=====================>>>>>
+
+                      // : const SizedBox.shrink();
                     }),
                 Container(
                   margin: const EdgeInsets.fromLTRB(15, 20, 15, 15),
@@ -905,21 +912,61 @@ class _MusicDetailsState extends State<MusicDetails>
                       ),
                       // Favorite
 
-
-
-                        //=========check here this is the Like section =====================>>>>>
-                             //=========check here this is the Like section =====================>>>>>
-                              //=========check here this is the Like section =====================>>>>>
-                               //=========check here this is the Like section =====================>>>>>
-                                //=========check here this is the Like section =====================>>>>>
-                                 //=========check here this is the Like section =====================>>>>>
-                                  //=========check here this is the Like section =====================>>>>>
-                                   //=========check here this is the Like section =====================>>>>>
-                                    //=========check here this is the Like section =====================>>>>>
-                                           //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
+                      //=========check here this is the Like section =====================>>>>>
 
                       // _buildLikeUnlike(),
                     ],
+                  ),
+                ),
+                Positioned(
+                  bottom: 80, // Adjust based on your layout
+                  left: 0,
+                  right: 0,
+                  child: LyricsExpandableContainer(
+                    lyrics: [
+                      'Twinkle, twinkle, little star,',
+                      'How I wonder what you are!',
+                      'Up above the world so high,',
+                      'Like a diamond in the sky.',
+                      'Twinkle, twinkle, little star,',
+                      'How I wonder what you are!',
+                      '',
+                      'When the blazing sun is gone,',
+                      'When he nothing shines upon,',
+                      'Then you show your little light,',
+                      'Twinkle, twinkle, all the night.',
+                      'Twinkle, twinkle, little star,',
+                      'How I wonder what you are!',
+                      '',
+                      'Then the traveler in the dark',
+                      'Thanks you for your tiny spark;',
+                      'He could not see which way to go,',
+                      'If you did not twinkle so.',
+                      'Twinkle, twinkle, little star,',
+                      'How I wonder what you are!',
+                      '',
+                      'In the dark blue sky you keep,',
+                      'And often through my curtains peep,',
+                      'For you never shut your eye,',
+                      'Till the sun is in the sky.',
+                      'Twinkle, twinkle, little star,',
+                      'How I wonder what you are!',
+                    ],
+                    textStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontSize: 14,
+                    ),
+                    containerColor:
+                        Theme.of(context).colorScheme.surface.withOpacity(0.1),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -1424,30 +1471,6 @@ class _MusicDetailsState extends State<MusicDetails>
                           },
                         ),
                       ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                       // _buildLikeUnlike(),
                       Row(
@@ -1996,39 +2019,6 @@ class _MusicDetailsState extends State<MusicDetails>
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Future<void> _shareWithSongBanner() async {
 //   try {
 //     final String message = Platform.isIOS
@@ -2037,7 +2027,7 @@ class _MusicDetailsState extends State<MusicDetails>
 
 //     // Get the song image URL
 //     final String? songImageUrl = ((audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.artUri).toString();
-    
+
 //     if (songImageUrl == null || songImageUrl == 'null') {
 //       // Fallback to original sharing method if no song image
 //       await _shareWithAppIconOnly(message);
@@ -2046,7 +2036,7 @@ class _MusicDetailsState extends State<MusicDetails>
 
 //     // Create composite image with song banner and app icon
 //     final File compositeImageFile = await _createCompositeShareImage(songImageUrl);
-    
+
 //     // Share with composite image
 //     await Share.shareXFiles(
 //       [XFile(compositeImageFile.path)],
@@ -2067,7 +2057,7 @@ class _MusicDetailsState extends State<MusicDetails>
 //     final tempDir = await getTemporaryDirectory();
 //     final file = File('${tempDir.path}/appicon.png');
 //     await file.writeAsBytes(byteData.buffer.asUint8List());
-    
+
 //     await Share.shareXFiles(
 //       [XFile(file.path)],
 //       text: message,
@@ -2124,12 +2114,12 @@ class _MusicDetailsState extends State<MusicDetails>
 //     final Paint circlePaint = Paint()
 //       ..color = Colors.white
 //       ..style = PaintingStyle.fill;
-    
+
 //     final Offset iconCenter = iconRect.center;
 //     final double circleRadius = iconSize / 2 + 8; // Slightly larger than icon
-    
+
 //     canvas.drawCircle(iconCenter, circleRadius, circlePaint);
-    
+
 //     // Draw app icon
 //     canvas.drawImageRect(
 //       appIcon,
@@ -2148,13 +2138,13 @@ class _MusicDetailsState extends State<MusicDetails>
 //           fontWeight: FontWeight.bold,
 //         ),
 //       );
-      
+
 //       paragraphBuilder.pushStyle(ui.TextStyle(color: Colors.white));
 //       paragraphBuilder.addText(songTitle);
-      
+
 //       final ui.Paragraph paragraph = paragraphBuilder.build();
 //       paragraph.layout(ui.ParagraphConstraints(width: canvasSize.width - 40));
-      
+
 //       canvas.drawParagraph(
 //         paragraph,
 //         Offset(20, canvasSize.height - iconSize - padding - paragraph.height - 20),
@@ -2167,7 +2157,7 @@ class _MusicDetailsState extends State<MusicDetails>
 //       canvasSize.width.toInt(),
 //       canvasSize.height.toInt(),
 //     );
-    
+
 //     final ByteData? pngBytes = await finalImage.toByteData(format: ui.ImageByteFormat.png);
 //     if (pngBytes != null) {
 //       await outputFile.writeAsBytes(pngBytes.buffer.asUint8List());
@@ -2184,29 +2174,13 @@ class _MusicDetailsState extends State<MusicDetails>
 // Future<File> _createSimpleFallbackImage() async {
 //   final tempDir = await getTemporaryDirectory();
 //   final outputFile = File('${tempDir.path}/fallback_share_image.png');
-  
+
 //   // Load and save app icon as fallback
 //   final ByteData appIconData = await rootBundle.load('assets/appicon/appicon.png');
 //   await outputFile.writeAsBytes(appIconData.buffer.asUint8List());
-  
+
 //   return outputFile;
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Future<void> _shareWithSongBanner() async {
   try {
@@ -2215,8 +2189,10 @@ Future<void> _shareWithSongBanner() async {
         : "Hey! I'm Listening ${(audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title}. Check it out now on ${Constant.appName}! \nhttps://play.google.com/store/apps/details?id=${Constant.appPackageName} \n";
 
     // Get the song image URL
-    final String? songImageUrl = ((audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.artUri).toString();
-    
+    final String? songImageUrl =
+        ((audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.artUri)
+            .toString();
+
     if (songImageUrl == null || songImageUrl == 'null') {
       // Fallback to original sharing method if no song image
       await _shareWithAppIconOnly(message);
@@ -2224,8 +2200,9 @@ Future<void> _shareWithSongBanner() async {
     }
 
     // Create composite image with song banner and app icon
-    final File compositeImageFile = await _createCompositeShareImage(songImageUrl);
-    
+    final File compositeImageFile =
+        await _createCompositeShareImage(songImageUrl);
+
     // Share with composite image
     await Share.shareXFiles(
       [XFile(compositeImageFile.path)],
@@ -2246,7 +2223,7 @@ Future<void> _shareWithAppIconOnly(String message) async {
     final tempDir = await getTemporaryDirectory();
     final file = File('${tempDir.path}/appicon.png');
     await file.writeAsBytes(byteData.buffer.asUint8List());
-    
+
     await Share.shareXFiles(
       [XFile(file.path)],
       text: message,
@@ -2259,18 +2236,21 @@ Future<void> _shareWithAppIconOnly(String message) async {
 // Create composite image with song banner and app icon overlay
 Future<File> _createCompositeShareImage(String songImageUrl) async {
   final tempDir = await getTemporaryDirectory();
-  final outputFile = File('${tempDir.path}/share_image_${DateTime.now().millisecondsSinceEpoch}.png');
+  final outputFile = File(
+      '${tempDir.path}/share_image_${DateTime.now().millisecondsSinceEpoch}.png');
 
   try {
     // Download song image
-    final http.Response songImageResponse = await http.get(Uri.parse(songImageUrl));
+    final http.Response songImageResponse =
+        await http.get(Uri.parse(songImageUrl));
     final Uint8List songImageBytes = songImageResponse.bodyBytes;
     final ui.Codec songCodec = await ui.instantiateImageCodec(songImageBytes);
     final ui.FrameInfo songFrameInfo = await songCodec.getNextFrame();
     final ui.Image songImage = songFrameInfo.image;
 
     // Load app icon
-    final ByteData appIconData = await rootBundle.load('assets/appicon/appicon.png');
+    final ByteData appIconData =
+        await rootBundle.load('assets/appicon/appicon.png');
     final Uint8List appIconBytes = appIconData.buffer.asUint8List();
     final ui.Codec appIconCodec = await ui.instantiateImageCodec(appIconBytes);
     final ui.FrameInfo appIconFrameInfo = await appIconCodec.getNextFrame();
@@ -2283,16 +2263,16 @@ Future<File> _createCompositeShareImage(String songImageUrl) async {
 
     // Draw song image as background (scaled to fill entire canvas)
     canvas.drawImageRect(
-      songImage, 
-      Rect.fromLTWH(0, 0, songImage.width.toDouble(), songImage.height.toDouble()),
-      Rect.fromLTWH(0, 0, canvasSize.width, canvasSize.height),
-      Paint()
-    );
+        songImage,
+        Rect.fromLTWH(
+            0, 0, songImage.width.toDouble(), songImage.height.toDouble()),
+        Rect.fromLTWH(0, 0, canvasSize.width, canvasSize.height),
+        Paint());
 
     // Add semi-transparent overlay for better contrast
-    final Paint overlayPaint = Paint()
-      ..color = Colors.black.withOpacity(0.3);
-    canvas.drawRect(Rect.fromLTWH(0, 0, canvasSize.width, canvasSize.height), overlayPaint);
+    final Paint overlayPaint = Paint()..color = Colors.black.withOpacity(0.3);
+    canvas.drawRect(
+        Rect.fromLTWH(0, 0, canvasSize.width, canvasSize.height), overlayPaint);
 
     // Calculate app icon position (bottom-right corner with padding)
     final double iconSize = canvasSize.width * 0.2; // 20% of image width
@@ -2308,12 +2288,12 @@ Future<File> _createCompositeShareImage(String songImageUrl) async {
     final Paint circlePaint = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.fill;
-    
+
     final Offset iconCenter = iconRect.center;
     final double circleRadius = iconSize / 2 + 8; // Slightly larger than icon
-    
+
     canvas.drawCircle(iconCenter, circleRadius, circlePaint);
-    
+
     // Draw app icon
     canvas.drawImageRect(
       appIcon,
@@ -2323,7 +2303,8 @@ Future<File> _createCompositeShareImage(String songImageUrl) async {
     );
 
     // Add song title text (optional)
-    final String? songTitle = (audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title;
+    final String? songTitle =
+        (audioPlayer.sequenceState?.currentSource?.tag as MediaItem?)?.title;
     if (songTitle != null && songTitle != 'null') {
       final ui.ParagraphBuilder paragraphBuilder = ui.ParagraphBuilder(
         ui.ParagraphStyle(
@@ -2332,16 +2313,17 @@ Future<File> _createCompositeShareImage(String songImageUrl) async {
           fontWeight: FontWeight.bold,
         ),
       );
-      
+
       paragraphBuilder.pushStyle(ui.TextStyle(color: Colors.white));
       paragraphBuilder.addText(songTitle);
-      
+
       final ui.Paragraph paragraph = paragraphBuilder.build();
       paragraph.layout(ui.ParagraphConstraints(width: canvasSize.width - 40));
-      
+
       canvas.drawParagraph(
         paragraph,
-        Offset(20, canvasSize.height - iconSize - padding - paragraph.height - 20),
+        Offset(
+            20, canvasSize.height - iconSize - padding - paragraph.height - 20),
       );
     }
 
@@ -2351,8 +2333,9 @@ Future<File> _createCompositeShareImage(String songImageUrl) async {
       canvasSize.width.toInt(),
       canvasSize.height.toInt(),
     );
-    
-    final ByteData? pngBytes = await finalImage.toByteData(format: ui.ImageByteFormat.png);
+
+    final ByteData? pngBytes =
+        await finalImage.toByteData(format: ui.ImageByteFormat.png);
     if (pngBytes != null) {
       await outputFile.writeAsBytes(pngBytes.buffer.asUint8List());
     }
@@ -2368,11 +2351,12 @@ Future<File> _createCompositeShareImage(String songImageUrl) async {
 Future<File> _createSimpleFallbackImage() async {
   final tempDir = await getTemporaryDirectory();
   final outputFile = File('${tempDir.path}/fallback_share_image.png');
-  
+
   // Load and save app icon as fallback
-  final ByteData appIconData = await rootBundle.load('assets/appicon/appicon.png');
+  final ByteData appIconData =
+      await rootBundle.load('assets/appicon/appicon.png');
   await outputFile.writeAsBytes(appIconData.buffer.asUint8List());
-  
+
   return outputFile;
 }
 

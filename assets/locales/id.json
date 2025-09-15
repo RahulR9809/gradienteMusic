@@ -146,8 +146,10 @@
   "register": "Daftar",
   "full_name": "Nama Lengkap",
   "darkmode": "Mode Gelap",
-  "podcast": "Podcast",
-  "liveevents": "Acara langsung",
+  "playlist": "My Playlist",
+
+  "myfavorites": "Favorit Saya",
+
   "onwards": "Dan seterusnya",
   "free": "Bebas",
   "freeevntdiscription": "Datanglah lebih awal untuk menyaksikan siaran langsung ini secara gratis",

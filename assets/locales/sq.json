@@ -146,8 +146,10 @@
   "register": "Regjistrohu",
   "full_name": "Emri i plotë",
   "darkmode": "Modaliteti i errët",
-  "podcast": "Podkastet",
-  "liveevents": "Ngjarjet e drejtpërdrejta",
+ "playlist": "My Playlist",
+
+ "myfavorites": "Të preferuarat e mia",
+
   "onwards": "E tutje",
   "free": "Falas",
   "freeevntdiscription": "Shkoni atje herët për të parë këtë ngjarje të drejtpërdrejtë absolutisht falas",

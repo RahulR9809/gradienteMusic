@@ -146,8 +146,9 @@
   "register": "નોંધણી કરો",
   "full_name": "પૂરું નામ",
   "darkmode": "ડાર્ક મોડ",
-  "podcast": "પોડકાસ્ટ",
-  "liveevents": "જીવંત ઘટનાઓ",
+  "playlist": "મારી પ્લેલિસ્ટ",
+"myfavorites": "મારા ફેવરિટ્સ",
+
   "onwards": "આગળ",
   "free": "મફત",
   "freeevntdiscription": "આ લાઇવ ઇવેન્ટ સંપૂર્ણપણે મફત જોવા માટે વહેલા પહોંચો",

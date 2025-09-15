@@ -365,7 +365,7 @@ class _HomeState extends State<Home> {
                         buildDrawerItem(
                           "ic_podcast.png",
                           "",
-                          "podcast",
+                          "playlist",
                           true,
                           () {
                             if (Navigator.canPop(context)) {
@@ -391,7 +391,7 @@ class _HomeState extends State<Home> {
                         buildDrawerItem(
                           "ic_liveevent.png",
                           "",
-                          "liveevents",
+                          "myfavorites",
                           true,
                           () async {
                             if (Navigator.canPop(context)) {

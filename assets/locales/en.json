@@ -146,8 +146,9 @@
   "register": "Register",
   "full_name": "FullName",
   "darkmode": "Dark Mode",
-  "podcast": "Podcasts",
-  "liveevents": "Live events",
+  "playlist": "My Playlist",
+  "myfavorites": "My Favorites",
+
   "onwards": "Onwards",
   "free": "Free",
   "freeevntdiscription": "Get there early to watch this live event absolutely free",

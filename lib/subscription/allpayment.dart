@@ -115,14 +115,22 @@ class AllPaymentState extends State<AllPayment> {
     required String testKey1,
     required String testKey2,
   }) {
+
+  print('🔍 Key Check - isLive: $isLive, isBothKeyReq: $isBothKeyReq');
+  print('🔍 Live Keys - Key1: ${liveKey1.isEmpty ? "EMPTY" : "EXISTS"}, Key2: ${liveKey2.isEmpty ? "EMPTY" : "EXISTS"}');
+  print('🔍 Test Keys - Key1: ${testKey1.isEmpty ? "EMPTY" : "EXISTS"}, Key2: ${testKey2.isEmpty ? "EMPTY" : "EXISTS"}');
+
     if (isLive == "1") {
       if (isBothKeyReq) {
         if (liveKey1 == "" || liveKey2 == "") {
+                  print('❌ LIVE KEYS MISSING - Key1: $liveKey1, Key2: $liveKey2');
+
           Utils.showSnackbar(context, "payment_not_processed", true);
           return false;
         }
       } else {
         if (liveKey1 == "") {
+               print('❌ LIVE KEY1 MISSING');
           Utils.showSnackbar(context, "payment_not_processed", true);
           return false;
         }
@@ -147,7 +155,18 @@ class AllPaymentState extends State<AllPayment> {
   _getData() async {
     paymentProvider = Provider.of<PaymentProvider>(context, listen: false);
     await paymentProvider.getPaymentOption();
+
+
+  print('🔍 Payment Options Status: ${paymentProvider.paymentOptionModel.status}');
+  print('🔍 Payment Options Result: ${paymentProvider.paymentOptionModel.result}');
+  print('🔍 Payment Loading: ${paymentProvider.payLoading}');
+
+
+
     await paymentProvider.setFinalAmount(widget.price ?? "");
+
+      print('🔍 Final Amount Set: ${paymentProvider.finalAmount}');
+
     /* PaymentID */
     paymentId = Utils.generateRandomOrderID();
     print('paymentId =====================> $paymentId');
@@ -158,6 +177,8 @@ class AllPaymentState extends State<AllPayment> {
     print('getUserData userName ==> $userName');
     print('getUserData userEmail ==> $userEmail');
     print('getUserData userMobileNo ==> $userMobileNo');
+
+      print('🔍 User Data - Name: $userName, Email: $userEmail, Mobile: $userMobileNo');
 
     Future.delayed(Duration.zero).then((value) {
       if (!mounted) return;
@@ -184,6 +205,7 @@ class AllPaymentState extends State<AllPayment> {
   /* add_transaction API */
   Future addTransaction(
       packageId, description, amount, paymentId, currencyCode) async {
+          print('🔍 Adding Transaction - PackageID: $packageId, Amount: $amount, PaymentID: $paymentId');
     Utils().showProgress(context);
     await paymentProvider.addTransaction(
         packageId, description, amount, paymentId);
@@ -240,6 +262,13 @@ class AllPaymentState extends State<AllPayment> {
   }
 
   openPayment({required String pgName}) async {
+
+  print('🔍 Opening Payment - Gateway: $pgName');
+  print('🔍 Final Amount: ${paymentProvider.finalAmount}');
+  print('🔍 Pay Type: ${widget.payType}');
+  print('🔍 Item ID: ${widget.itemId}');
+  print('🔍 Currency: ${widget.currency}');
+
     printLog("finalAmount =============> ${paymentProvider.finalAmount}");
     if (paymentProvider.finalAmount != "0") {
       if (pgName == "inapp") {
@@ -862,6 +891,9 @@ class AllPaymentState extends State<AllPayment> {
     printLog(
         "testkey====> ${paymentProvider.paymentOptionModel.result?.razorpay?.key1}");
     if (paymentProvider.paymentOptionModel.result?.razorpay != null) {
+          print('🔍 Razorpay Config Found');
+    print('🔍 Is Live: ${paymentProvider.paymentOptionModel.result?.razorpay?.isLive}');
+    print('🔍 Visibility: ${paymentProvider.paymentOptionModel.result?.razorpay?.visibility}');
       /* Check Keys */
       bool isContinue = checkKeysAndContinue(
         isLive:
@@ -876,6 +908,8 @@ class AllPaymentState extends State<AllPayment> {
         testKey2:
             (paymentProvider.paymentOptionModel.result?.razorpay?.key2 ?? ""),
       );
+          print('🔍 Key check result: $isContinue');
+
       if (!isContinue) return;
       printLog("checkin Complite");
       /* Check Keys */
@@ -906,6 +940,8 @@ class AllPaymentState extends State<AllPayment> {
         printLog('Razorpay Error :=========> $e');
       }
     } else {
+          print('❌ Razorpay config is NULL');
+
       Utils.showSnackbar(context, "payment_not_processed", true);
     }
   }

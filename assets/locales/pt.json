@@ -146,8 +146,10 @@
   "register": "Cadastre-se",
   "full_name": "Nome completo",
   "darkmode": "Modo escuro",
-  "podcast": "Podcasts",
-  "liveevents": "Eventos ao vivo",
+ "playlist": "My Playlist",
+
+"myfavorites": "Meus favoritos",
+
   "onwards": "Em diante",
   "free": "Livre",
   "freeevntdiscription": "Chegue cedo para assistir a este evento ao vivo totalmente gratuito",

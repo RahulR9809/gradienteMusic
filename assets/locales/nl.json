@@ -146,8 +146,10 @@
   "register": "Register",
   "full_name": "Volledige naam",
   "darkmode": "Donkere modus",
-  "podcast": "Podcasts",
-  "liveevents": "Live-evenementen",
+"playlist": "My Playlist",
+
+ "myfavorites": "Mijn favorieten",
+
   "onwards": "Verder",
   "free": "Vrij",
   "freeevntdiscription": "Zorg dat je er vroeg bij bent om dit live-evenement helemaal gratis te bekijken",
